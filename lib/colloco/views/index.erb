@@ -1,0 +1,44 @@
+<br />
+
+<h1>Welcome to <%= @app_name %></h1>
+
+<br />
+<br />
+<br />
+
+<div id="box">
+
+<ul id="maps">
+  <p class="<%= cycle %>">
+
+<table>
+  <tr>
+    <td class="mt">ID</td>
+    <td class="mt">Title</td>
+    <td class="mt">Maker</td>
+    <td class="mt">Date</td>
+    <td class="mt">Source</td>
+    <td class="mt">Price</td>
+  </tr>
+  <% i = 0 %>
+  <% @maps.each do |map| %>
+    <% i += 1 %>
+    <tr class="<%= cycle %>">
+        <td><a href=/map/<%= map["id"] %>><%= map["id"] %></a></td>
+        <td><%= map["title"] %></td>
+        <td><%= map["maker"] %></td>
+        <td><%= map["date"] %></td>
+        <td><%= map["source"] %></td>
+        <td><%= map["price"] %></td>
+      </tr>
+  <% end %>
+</table>
+
+  </p>
+</ul>
+
+  <div class="spacer">
+  &nbsp;
+  </div>
+
+</div>
