@@ -23,6 +23,7 @@ module Colloco
 
     configure do
       load_configuration("config/config.yml", "APP_CONFIG")
+      set :session_secret, "My session secret"
     end
 
     set :public_folder, File.join(File.dirname(__FILE__), 'public')
@@ -91,6 +92,11 @@ module Colloco
       else
         redirect back, :error => errors(@map)
       end
+    end
+
+    get '/search'  do
+       @results = Maps.all(:title.like => "%#{params[:query]}%")
+      erb :search
     end
 
     get '/download' do
