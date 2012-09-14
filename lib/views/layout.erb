@@ -1,13 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" href="/css/styles.css">
     <title><%= @app_name %></title>
-  </head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/flash.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+
+ </head>
 
   <body>
-    <div class='success'><%= @notice %></div>
-    <div class='warning'><%= @success %></div>
-    <%= yield %>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Welcome to Colloco</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/add">Add a map</a></li
+          </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+  <div class="container-fluid">
+      <div class="row-fluid">
+        <%= styled_flash %>
+        <%= yield %>
+      </div>
+  </div>
+
+   <script src="/js/jquery.js"></script>
+   <script src="/js/bootstrap.min.js"></script>
+
   </body>
 </html>

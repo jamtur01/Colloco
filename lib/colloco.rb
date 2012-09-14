@@ -1,6 +1,8 @@
 require 'version'
 require 'sinatra'
 require 'data_mapper'
+require 'sinatra/flash'
+require 'sinatra/redirect_with_flash'
 require 'yaml'
 
 def load_configuration(file, name)
@@ -13,6 +15,11 @@ end
 
 module Colloco
   class Application < Sinatra::Base
+
+    enable :sessions
+
+    register Sinatra::Flash
+    helpers Sinatra::RedirectWithFlash
 
     configure do
       load_configuration("config/config.yml", "APP_CONFIG")
@@ -32,6 +39,8 @@ module Colloco
       property :date, String, :key => true
       property :price, String
       property :source, String
+      property :size, String
+      property :notes, Text
       property :created_at, DateTime
 
       validates_presence_of :title
@@ -46,8 +55,7 @@ module Colloco
 
     get '/' do
       protected!
-      @maps = Maps.all(:order => [ :id.desc ])
-      flash_message(params[:m])
+      @maps = Maps.all(:order => [ :id.asc ])
       erb :index
     end
 
@@ -58,15 +66,14 @@ module Colloco
 
     get '/add' do
       protected!
-      flash_message(params[:m])
       erb :add
     end
 
     post '/create' do
-      redirect "/?m=blank" if params[:title].empty?
+      redirect back, :error => 'You need to specify a title.' if params[:title].empty?
 
       if Maps.count(:conditions => { :title => params[:title] }) > 0
-        redirect "/?m=map_taken"
+        redirect back, :error => "You already have a map called #{params[:title]}"
       end
 
       @map = Maps.new(:title      => params[:title],
@@ -74,12 +81,14 @@ module Colloco
                       :date       => params[:date],
                       :price      => params[:price],
                       :source     => params[:source],
+                      :size       => params[:size],
+                      :notes      => params[:notes],
                       :created_at => Time.now)
 
       if @map.save
-        redirect "/?m=success"
+        redirect '/', :success => "New map #{params[:title]} added."
       else
-        redirect "/?m=invalid"
+        redirect back, :error => errors(@map)
       end
     end
 
@@ -109,27 +118,12 @@ module Colloco
     end
 
     helpers do
-
-      def cycle
-        %w{even odd}[@_cycle = ((@_cycle || -1) + 1) % 2]
-      end
-
-      CYCLE = %w{even odd}
-
-      def cycle_fully_sick
-        CYCLE[@_cycle = ((@_cycle || -1) + 1) % 2]
-      end
-
-      def flash_message(message)
-        case message
-        when "blank"
-          @notice = "You need to specify a title."
-        when "map_taken"
-          @notice = "You've already added a map with that title."
-        when "success"
-          @success = "Thank you! New map added!"
-        else ""
+      def errors(obj)
+        tmp = []
+        obj.errors.each do |e|
+          tmp << e
         end
+        tmp
       end
 
       def pluralize(count, singular, plural = nil)

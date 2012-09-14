@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.8.11"
   s.summary = "A web-based front-end and tool for tracking my map collection."
   s.add_dependency(%q<sinatra>, [">= 0"])
+  s.add_dependency(%q<sinatra-flash>, [">= 0"])
+  s.add_dependency(%q<sinatra-redirect-with-flash>, [">= 0"])
   s.add_dependency(%q<sqlite3>, [">= 0"])
   s.add_dependency(%q<data_mapper>, [">= 0"])
   s.add_dependency(%q<dm-sqlite-adapter>, [">= 0"])

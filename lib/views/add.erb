@@ -1,35 +1,53 @@
 <br />
 
-<h1>Welcome to <%= @app_name %></h1>
-
-<br />
-<br />
-<br />
-
-<div style="width: 360px; border: 1px dotted #333; padding: 5px; margin: 0px auto;">
-  <form action='/create' method='post'>
-    <div class="row">
-      <span class="label">Title:</span><span class="formw"><input name='title' type="text" size="25" /></span>
+  <form class="form-horizontal" action='/create' method='post'>
+    <div class="control-group">
+      <label class="control-label" for="title">Title</label>
+      <div class="controls">
+        <input type="text" name="title" id="title" placeholder="Title">
+      </div>
     </div>
-    <div class="row">
-      <span class="label">Maker:</span><span class="formw"><input name='maker' type="text" size="25" /></span>
+    <div class="control-group">
+      <label class="control-label" for="maker">Maker</label>
+      <div class="controls">
+        <input type="text" name="maker" id="maker" placeholder="Maker">
+      </div>
     </div>
-    <div class="row">
-      <span class="label">Date:</span><span class="formw"><input name='date' type="text" size="25" /></span>
+    <div class="control-group">
+      <label class="control-label" for="date">Date</label>
+      <div class="controls">
+        <input type="text" name="date" id="date" placeholder="Date">
+      </div>
     </div>
-   <div class="row">
-      <span class="label">Source:</span><span class="formw"><input name='source' type="text" size="25" /></span>
+    <div class="control-group">
+      <label class="control-label" for="source">Source</label>
+      <div class="controls">
+        <input type="text" name="source" id="source" placeholder="Source">
+      </div>
     </div>
-   <div class="row">
-      <span class="label">Price:</span><span class="formw"><input name='price' type="text" size="25" /></span>
+    <div class="control-group">
+      <label class="control-label" for="size">Size</label>
+      <div class="controls">
+        <input type="text" name="size" id="size" placeholder="Size">
+      </div>
     </div>
-    <div class="row">
-      <span class="formw"><input type='submit' name='submit' value='Add new map' /></span>
+       <div class="control-group">
+      <label class="control-label" for="notes">Notes</label>
+      <div class="controls">
+        <input type="text" name="notes" size="80" id="notes" placeholder="Notes">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="price">Price</label>
+      <div class="controls">
+        <input type="text" name="price" id="price" placeholder="Price">
+      </div>
+    </div>
+    <div class="control-group">
+    <div class="controls">
+      <button type="submit" name="submit" class="btn">Add New Map</button>
       <input type='hidden' name='referer' value='<%= request.env["HTTP_REFERER"] %>'>
     </div>
-  <div class="spacer">
-  &nbsp;
   </div>
- </form>
+</form>
 
-</div>
