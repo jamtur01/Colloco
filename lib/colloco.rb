@@ -27,6 +27,7 @@ module Colloco
 
     set :public_folder, File.join(File.dirname(__FILE__), 'public')
     set :views, File.join(File.dirname(__FILE__), 'views')
+    DataMapper::Property::String.length(255)
     DataMapper.setup(:default, "sqlite3:db/colloco.db")
     disable :show_exceptions
 
@@ -103,7 +104,7 @@ module Colloco
       csv_content = FasterCSV.generate do |csv|
         maps = Maps.all(:order => [ :id.desc ])
         maps.each do |map|
-          csv << [map.title, map.maker, map.date, map.price, map.source]
+          csv << [map.title, map.maker, map.date, map.source, map.size, map.notes, map.price]
         end
       end
 
