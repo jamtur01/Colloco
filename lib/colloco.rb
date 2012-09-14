@@ -39,7 +39,7 @@ module Colloco
       property :title, String, :length => 250, :key => true
       property :maker, String, :key => true
       property :date, String, :key => true
-      property :price, String
+      property :price, Integer
       property :source, String
       property :size, String
       property :notes, Text
@@ -58,6 +58,7 @@ module Colloco
     get '/' do
       protected!
       @maps = Maps.all(:order => [ :id.asc ])
+      @total = Maps.sum(:price)
       erb :index
     end
 
