@@ -95,7 +95,7 @@ module Colloco
     end
 
     get '/search'  do
-       @results = Maps.all(:title.like => "%#{params[:query]}%")
+       @results = Maps.all(:title.like => "%#{params[:query]}%") | Maps.all(:source.like => "%#{params[:query]}%") | Maps.all(:notes.like => "%#{params[:query]}%")
       erb :search
     end
 
