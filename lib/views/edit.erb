@@ -1,0 +1,53 @@
+<br />
+
+  <form class="form-horizontal" action="/map/<%= @map.id %>" method='post'>
+    <div class="control-group">
+      <label class="control-label" for="title">Title</label>
+      <div class="controls">
+        <input type="text" name="title" id="title" value="<%= @map.title %>">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="maker">Maker</label>
+      <div class="controls">
+        <input type="text" name="maker" id="maker" value="<%= @map.maker %>">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="date">Date</label>
+      <div class="controls">
+        <input type="text" name="date" id="date" value="<%= @map.date %>">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="source">Source</label>
+      <div class="controls">
+        <input type="text" name="source" id="source" value="<%= @map.source %>">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="size">Size</label>
+      <div class="controls">
+        <input type="text" name="size" id="size" value="<%= @map.size %>">
+      </div>
+    </div>
+       <div class="control-group">
+      <label class="control-label" for="notes">Notes</label>
+      <div class="controls">
+        <input type="text" name="notes" size="80" id="notes" value="<%= @map.notes %>">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="price">Price</label>
+      <div class="controls">
+        <input type="text" name="price" id="price" value="<%= @map.price %>">
+      </div>
+    </div>
+    <div class="control-group">
+    <div class="controls">
+      <button type="submit" name="submit" class="btn">Update Map</button>
+      <input type='hidden' name='referer' value='<%= request.env["HTTP_REFERER"] %>'>
+    </div>
+  </div>
+</form>
+

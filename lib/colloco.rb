@@ -63,7 +63,27 @@ module Colloco
 
     get '/map/:id' do |id|
       @map = Maps.first(:id => params[:id])
-      erb :map
+      erb :edit
+    end
+
+    post '/map/:id' do
+      map = Maps.get(params[:id],params[:title],params[:maker],params[:date])
+
+      map.attributes = {
+        :title      => params[:title],
+        :maker      => params[:maker],
+        :date       => params[:date],
+        :price      => params[:price],
+        :source     => params[:source],
+        :size       => params[:size],
+        :notes      => params[:notes],
+      }
+
+      if map.save
+        redirect '/', :success => "Map #{params[:title]} updated." 
+      else
+        redirect back, :error => errors(map)
+      end
     end
 
     get '/add' do
